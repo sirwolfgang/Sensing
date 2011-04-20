@@ -85,10 +85,7 @@ class SensingNet
 			virtual ~Packet(){}
 
 			// Constructor: Parse raw packet into packet
-			Packet(const char* packet)
-			{
-				PacketParse(packet);
-			}
+			Packet(const char* packet){ ParsePacket(packet); }
 
 			// Constructor: Parse raw data into packet
 			Packet(const char* reading, const char* unit, const char* status);
@@ -100,11 +97,16 @@ class SensingNet
 			Packet operator=( Packet that);
 
 			// Parse raw packet into packet
-			void PacketParse(const char* packet);
+			void ParsePacket(const char* packet);
+			void SetReading(const char* data);
+			void SetUnit(const char* unit);
+			void SetStatus(const char* status);
 
 			// Return raw packet
-			char* BuildPacket();
-
+			char* GetPacket();
+			char* GetReading(){ return m_sensorReading; }
+			char* GetUnit(){ return m_sensorUnit; }
+			char* GetStatus(){ return m_sensorStatus; }
 		};
 		public:
 			// TODO: Everything
