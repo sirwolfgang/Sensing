@@ -38,7 +38,7 @@ SensingNet::Packet::Packet( const Packet& that )
 		m_sensorStatus[i] = that.m_sensorStatus[i];
 }
 
-SensingNet::Packet SensingNet::Packet::operator=( Packet that )
+SensingNet::Packet::operator=( Packet that )
 {
 	for (unsigned int i = 0; i < FIELD1_LEN +1; ++i)
 		m_sensorReading[i] = that.m_sensorReading[i];
@@ -65,7 +65,7 @@ void SensingNet::Packet::ParsePacket( const char* packet )
 	m_sensorStatus[FIELD3_LEN +1] = '\0';
 }
 
-char* SensingNet::Packet::BuildPacket()
+char* SensingNet::Packet::GetPacket()
 {
 	char destination[PACKET_LEN];
 
@@ -85,16 +85,19 @@ void SensingNet::Packet::SetReading( const char* data )
 {
 	for (unsigned int i = 0; i < FIELD1_LEN; ++i)
 		m_sensorReading[i] = data[i];
+	m_sensorStatus[FIELD1_LEN +1] = '\0';
 }
 
 void SensingNet::Packet::SetUnit( const char* unit )
 {
 	for (unsigned int i = 0; i < FIELD2_LEN; ++i)
 		m_sensorUnit[i] = unit[i];
+	m_sensorStatus[FIELD2_LEN +1] = '\0';
 }
 
 void SensingNet::Packet::SetStatus( const char* status )
 {
 	for (unsigned int i = 0; i < FIELD3_LEN; ++i)
 		m_sensorStatus[i] = status[i];
+	m_sensorStatus[FIELD3_LEN +1] = '\0';
 }
