@@ -70,9 +70,6 @@ byte: 0123456789012340123456789
 
 class SensingNet
 {
-	class SensingNet
-	{ 
-
 		class Packet{
 
 			// +1 to allow for Null Terminator
