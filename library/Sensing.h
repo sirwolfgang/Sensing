@@ -29,7 +29,7 @@
 #define SensingNet_h
 
 #include "WProgram.h"	//required by arduino libraries
-#include "..\Wire\Wire.h"		//i2c library
+#include <Wire.h>		//i2c library
 
 #define PACKET_LEN 25
 
@@ -69,10 +69,15 @@
 
 class SensingNet
 {
+	String sensorReading;
+	String sensorUnit;
+	String sensorStatus;
 
+	char xmitPacket[PACKET_LEN + 1];
 
-	//NESTED CLASS, used to minimize difficulty in changing protocol later
+	TwoWire hardWire;
 
+	//PRIVATE CLASS, used to minimize difficulty in changing protocol later
 	class Packet{
 
 				// +1 to allow for Null Terminator
@@ -112,51 +117,27 @@ class SensingNet
 				char* GetStatus(){ return m_sensorStatus; }
 		};
 
-
-
-
-
-
-
 	public:
-		SensingNet(); 				//constructor for master (hub) device
+		SensingNet(){} 				//constructor for master (hub) device
 		void begin();				//match the wire convention - no param = master
-		void begin(int addr);			//param = slave with id
-		void begin(int, int, int);   //params = pins for address detection
+		void begin(int addr);		//param = slave with id
+		void begin(int, int, int);	//params = pins for address detection
 
 		boolean updateNodeData(int);
 
-		void setSensorReading(float, int); //float and double are the same on arduino...
+		void setSensorReading(float, int);	//float and double are the same on arduino...
 		//todo: overloaded versions for other datatypes? Needed?
 
 		void setSensorUnit(String unit);
 
 		void setSensorStatus(String status);
 
-		String  getSensorReading();
-		String  getSensorUnit();			//todo:inline these!
-		String  getSensorStatus();
+		String getSensorReading(){ return sensorReading; }
+		String getSensorUnit(){ return sensorUnit; }
+		String getSensorStatus(){ return sensorStatus; }
 
 		void onQuery();
 
 		String padString(String in, int len, char pad);
-
-	private:
-
-		String sensorReading;
-		String sensorUnit;
-		String sensorStatus;
-
-		char xmitPacket[PACKET_LEN + 1];
-
-		TwoWire hardWire;
-
-
-
-
-
 };
-
-
-
 #endif

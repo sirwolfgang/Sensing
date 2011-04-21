@@ -47,7 +47,6 @@ class SensingNetWrapper
 	//this class is needed to handle the callback from the wire library to a member function.
 	//wrapper implementation from http://www.comp.ua.ac.be/publications/files/Adapter-Para04.pdf
 
-
 	public:
 		static void onQuery() { return fObj->onQuery(); }
 		static void setObj (SensingNet& obj) {fObj = &obj; }
@@ -55,20 +54,9 @@ class SensingNetWrapper
 	private:
 		static SensingNet* fObj;
 
-
-
 };
 
 SensingNet* SensingNetWrapper::fObj=NULL;
-
-
-
-SensingNet::SensingNet()
-{
-	//default constructor
-}
-
-
 
 void SensingNet::begin()
 {
@@ -79,7 +67,6 @@ void SensingNet::begin()
 void SensingNet::begin(int addr)
 {
 	//to be called by nodes
-
 	hardWire.begin(addr);
 
 	//wrapper implementation (see declaration above)
@@ -143,9 +130,6 @@ boolean SensingNet::updateNodeData(int id)
 void SensingNet::setSensorReading(float val, int precision)
 {
 
-
-
-
 	//found float to stringcode here:
 	//http://code.google.com/p/arduino/issues/detail?id=372
 
@@ -185,8 +169,6 @@ void SensingNet::setSensorReading(float val, int precision)
 	sensorReading = "";
 	sensorReading.concat(padString(resultString, FIELD1_LEN, ' '));
 
-
-
 	Serial.print("[ssr]:");
 	Serial.println(sensorReading);
 
@@ -214,33 +196,6 @@ void SensingNet::setSensorStatus(String status)
 
 }
 
-
-String SensingNet::getSensorReading()
-{
-	//Serial.print("[gsr]:");
-	//Serial.println(sensorReading);
-
-	return sensorReading;
-	//can i just inline these?
-}
-
-String SensingNet::getSensorUnit()
-{
-	//Serial.print("[gsu]:");
-	//Serial.println(sensorUnit);
-	return sensorUnit;
-	//can i just inline these?
-}
-
-String SensingNet::getSensorStatus()
-{
-	//Serial.print("[gss]:");
-	//Serial.println(sensorStatus);
-	return sensorStatus;
-	//can i just inline these?
-}
-
-
 void SensingNet::onQuery() //callback function for slaves to respond when called by the master
 {
 
@@ -262,8 +217,6 @@ void SensingNet::onQuery() //callback function for slaves to respond when called
 	Serial.println(xmitChar);
 
 	hardWire.send(xmitChar); //doesnt xmit the null terminator byte...
-
-
 
 }
 
