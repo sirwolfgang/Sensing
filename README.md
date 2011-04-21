@@ -15,6 +15,7 @@ Links
 Install Directions
 -----------------------
 Step 1: Rename the library to sensing and place it inside of the 'libraries' that is located with the Arduino IDE.
+
 Step 2: Open the .pde of the device you wish to 'flash'/install, connect it to the Ardunio IDE and upload.
 
 Repeat step 2 for devices as needed.
