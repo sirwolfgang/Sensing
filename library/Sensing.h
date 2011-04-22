@@ -126,6 +126,11 @@ class SensingNet
 		boolean updateNodeData(int);
 
 		void setSensorReading(float, int);	//float and double are the same on arduino...
+		void setSensorReading(long);
+		void setSensorReading(int);
+
+
+
 		//todo: overloaded versions for other datatypes? Needed?
 
 		void setSensorUnit(String unit);

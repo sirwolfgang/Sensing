@@ -176,6 +176,23 @@ void SensingNet::setSensorReading(float val, int precision)
 
 }
 
+void SensingNet::setSensorReading(long val)
+{
+	sensorReading = "";
+	sensorReading.concat(padString(String(val), FIELD1_LEN, ' '));
+
+	Serial.print("[ssr]:");
+	Serial.println(sensorReading);
+}
+
+void SensingNet::setSensorReading(int val)
+{
+	sensorReading = "";
+	sensorReading.concat(padString(String(val), FIELD1_LEN, ' '));
+
+	Serial.print("[ssr]:");
+	Serial.println(sensorReading);
+}
 
 
 void SensingNet::setSensorUnit(String unit)
