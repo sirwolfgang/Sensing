@@ -6,8 +6,10 @@ SensingNet node;
 void setup()
 {
   Serial.begin(9600);
-  node.begin(5);
-
+  node.begin(5); //specify a node address
+  //node.begin(8,9,10); //use 3 digital pins to set address
+  //todo: document this addressing
+  
   node.setSensorUnit("m");  //The unit normally doesnt change.. 
   
 }

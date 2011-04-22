@@ -37,6 +37,8 @@
 #define FIELD2_LEN 5  //unit
 #define FIELD3_LEN 10 //status
 
+#define I2C_ADDRESS_BASE 10
+
 /*
 	Current Protocol Definition
 

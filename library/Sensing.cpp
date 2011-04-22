@@ -74,6 +74,43 @@ void SensingNet::begin(int addr)
 	hardWire.onRequest(&SensingNetWrapper::onQuery);
 }
 
+void SensingNet::begin(int pin0, int pin1, int pin2)
+{
+
+  pinMode(pin0, INPUT);
+  pinMode(pin1, INPUT);
+  pinMode(pin2, INPUT);
+
+  digitalWrite(pin0, HIGH); //activate internal pullup resistors
+  digitalWrite(pin1, HIGH);
+  digitalWrite(pin2, HIGH);
+
+  boolean p0 = digitalRead(pin0);
+  boolean p1 = digitalRead(pin1);
+  boolean p2 = digitalRead(pin2);
+
+  int plugAddr=0;
+
+  if (!digitalRead(pin0))
+  {
+    plugAddr+=1;
+  }
+  if(!digitalRead(pin1))
+  {
+    plugAddr+=2;
+  }
+  if(!digitalRead(pin2))
+  {
+    plugAddr+=4;
+  }
+  Serial.print("[pinAddr]:");
+  Serial.println(plugAddr);
+
+  begin(plugAddr + I2C_ADDRESS_BASE); //call the standard begin function with address
+
+}
+
+
 boolean SensingNet::updateNodeData(int id)
 {
 	int bytesRecv = 0;
