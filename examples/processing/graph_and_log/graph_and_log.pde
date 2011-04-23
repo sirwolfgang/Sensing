@@ -11,7 +11,7 @@ import org.gwoptics.graphics.graph2D.Graph2D;
 import org.gwoptics.graphics.graph2D.traces.ILine2DEquation;
 import org.gwoptics.graphics.graph2D.traces.RollingLine2DTrace;
 
-boolean MAKE_MOVIE = true;
+boolean MAKE_MOVIE = false;
 
 MovieMaker mm;
 
