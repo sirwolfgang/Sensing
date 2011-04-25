@@ -12,14 +12,14 @@ TYPETIME	6			  unsigned long
 */
 
 // User Section: Defines ---------- ---------- ---------- ---------- 
-#define PACKET_TYPE 2
+#define PACKET_TYPE 2			// Use the above table as reference
 #define DATA_TYPE	int
 
 #define DATA_UNIT	"m/s^2"		// 5 char max
 
 #define ADDRESS_TYPE	true	// True = Preset, False = pin based
 #define ADDRESS			2		// Preset Value 
-#define ADDRESS_PINS	8,9,10	// Digtial Pins to Address off of 
+#define ADDRESS_PINS	8,9,10	// Digital Pins to Address off of 
 // ---------- ---------- ---------- ---------- ---------- ---------- 
 
 Packet<DATA_TYPE> g_packet;
@@ -42,7 +42,7 @@ void setup()
 #else
 	SensingNodeAddress(ADDRESS_PINS);
 #endif
-	g_packet.SetUnit("m/s^2");
+	g_packet.SetUnit(DATA_UNIT);
 }
 
 void loop()

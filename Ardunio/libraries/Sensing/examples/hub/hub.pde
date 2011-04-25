@@ -7,12 +7,12 @@
 
 SensingHub g_hub;
 
-// User Section: Output
+// User Section: Output		     --------- --------- --------- 
 void output()
 {
 	g_hub.SerialPrintAllNew();
 }
-
+// --------- --------- --------- --------- --------- --------- 
 //////////////////////////////////////////////////////////////////////////
 void setup()
 {

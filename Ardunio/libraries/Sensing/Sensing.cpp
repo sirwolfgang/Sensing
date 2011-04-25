@@ -7,7 +7,7 @@ SensingHub::SensingHub()
 
 void SensingHub::CheckAddress( unsigned int addr )
 {
-	Wire.requestFrom(addr, 1);    // request 1 bytes from slave device #2
+	Wire.requestFrom(addr, 1);    // request 1 bytes from slave device
 
 	if ((int)Wire.available() == 1)
 	{
@@ -269,7 +269,7 @@ void SensingHub::SerialPrintAllLast()
 {
 	Serial.print( m_LastAddr );
 	Serial.print( "," );
-	Serial.print( GetLastInt() );
+	Serial.print( GetLastFloat() );
 	Serial.print( "," );
 	Serial.print( GetLastUnit() );
 	Serial.print( "," );
