@@ -267,6 +267,8 @@ void SensingHub::SerialPrintAllNew()
 
 void SensingHub::SerialPrintAllLast()
 {
+	Serial.print( millis() );
+	Serial.print( "," );
 	Serial.print( m_LastAddr );
 	Serial.print( "," );
 	Serial.print( GetLastFloat() );
