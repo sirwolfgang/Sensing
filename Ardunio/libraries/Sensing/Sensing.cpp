@@ -271,7 +271,30 @@ void SensingHub::SerialPrintAllLast()
 	Serial.print( "," );
 	Serial.print( m_LastAddr );
 	Serial.print( "," );
-	Serial.print( GetLastFloat() );
+
+	// Change based on datatype received
+	switch(m_Type)
+	{
+	case TYPEBOOL:
+		Serial.print( GetLastBool() );
+		break;
+	case TYPEINT:
+		Serial.print( GetLastInt() );
+		break;
+	case TYPEFLOAT:
+		Serial.print( GetLastFloat() );
+		break;
+	case TYPELONG:
+		Serial.print( GetLastLong() );
+		break;
+	case TYPEBYTE:
+		Serial.print( GetLastByte() );
+		break;
+	case TYPETIME:
+		Serial.print( GetLastTime() );
+		break;
+	}
+
 	Serial.print( "," );
 	Serial.print( GetLastUnit() );
 	Serial.print( "," );

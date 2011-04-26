@@ -12,8 +12,8 @@ TYPETIME	6			  unsigned long
 */
 
 // User Section: Defines ---------- ---------- ---------- ---------- 
-#define PACKET_TYPE 2			// Use the above table as reference
-#define DATA_TYPE	int
+#define PACKET_TYPE 3			// Use the above table as reference
+#define DATA_TYPE	float
 
 #define DATA_UNIT	"m/s^2"		// 5 char max
 
@@ -30,7 +30,7 @@ int g_stage;
 // User Section: Sensor Setup	    ---------- ---------- ---------- 
 void input()
 {
-	g_packet.SetReading(12345);
+	g_packet.SetReading(12.345);
 	g_packet.SetStatus(true);
 }
 // ---------- ---------- ---------- ---------- ---------- ---------- 
