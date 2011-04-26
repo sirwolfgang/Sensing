@@ -281,7 +281,7 @@ void SensingHub::SerialPrintAllLast()
 
 void SensingHub::handleBool()
 {
-	Wire.requestFrom(2, sizeof(Packet<bool>));
+	Wire.requestFrom(m_LastAddr, sizeof(Packet<bool>));
 	if ( (int)sizeof(Packet<bool>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
@@ -298,7 +298,7 @@ void SensingHub::handleBool()
 
 void SensingHub::handleInt()
 {
-	Wire.requestFrom(2, sizeof(Packet<int>));
+	Wire.requestFrom(m_LastAddr, sizeof(Packet<int>));
 	if ( (int)sizeof(Packet<int>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
@@ -315,7 +315,7 @@ void SensingHub::handleInt()
 
 void SensingHub::handleFloat()
 {
-	Wire.requestFrom(2, sizeof(Packet<float>));
+	Wire.requestFrom(m_LastAddr, sizeof(Packet<float>));
 	if ( (int)sizeof(Packet<float>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
@@ -332,7 +332,7 @@ void SensingHub::handleFloat()
 
 void SensingHub::handleLong()
 {
-	Wire.requestFrom(2, sizeof(Packet<long>));
+	Wire.requestFrom(m_LastAddr, sizeof(Packet<long>));
 	if ( (int)sizeof(Packet<long>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
@@ -349,7 +349,7 @@ void SensingHub::handleLong()
 
 void SensingHub::handleByte()
 {
-	Wire.requestFrom(2, sizeof(Packet<byte>));
+	Wire.requestFrom(m_LastAddr, sizeof(Packet<byte>));
 	if ( (int)sizeof(Packet<byte>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
@@ -366,7 +366,7 @@ void SensingHub::handleByte()
 
 void SensingHub::handleTime()
 {
-	Wire.requestFrom(2, sizeof(Packet<unsigned long>));
+	Wire.requestFrom(m_LastAddr, sizeof(Packet<unsigned long>));
 	if ( (int)sizeof(Packet<unsigned long>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
