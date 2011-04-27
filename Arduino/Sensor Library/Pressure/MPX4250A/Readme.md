@@ -18,7 +18,7 @@ Resources
 
 Notes
 -----
-On the sensor the pin with the notch missing is Pin1. This is your data out, with this code; this is to be connected to the Arduino's ‘Analog In’ 0.
+On the sensor the pin with the notch missing is Pin1. This is your data out, with this code; this is to be connected to the Arduino's 'Analog In' 0.
 Pin 1 - Data
 Pin 2 - Ground
 Pin 3 - +5V
