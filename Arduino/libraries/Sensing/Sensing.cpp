@@ -12,8 +12,7 @@ void SensingHub::CheckAddress( unsigned int addr )
 	if ((int)Wire.available() == 1)
 	{
 		int type = Wire.receive();
-		m_newdata = true;
-
+		
 		switch(type)
 		{
 		case TYPENULL:
@@ -21,31 +20,37 @@ void SensingHub::CheckAddress( unsigned int addr )
 		case TYPEBOOL:
 			m_Type = TYPEBOOL;
 			m_LastAddr = addr;
+			m_newdata = true;
 			handleBool();
 			break;
 		case TYPEINT:
 			m_Type = TYPEINT;
 			m_LastAddr = addr;
+			m_newdata = true;
 			handleInt();
 			break;
 		case TYPEFLOAT:
 			m_Type = TYPEFLOAT;
 			m_LastAddr = addr;
+			m_newdata = true;
 			handleFloat();
 			break;
 		case TYPELONG:
 			m_Type = TYPELONG;
 			m_LastAddr = addr;
+			m_newdata = true;
 			handleLong();
 			break;
 		case TYPEBYTE:
 			m_Type = TYPEBYTE;
 			m_LastAddr = addr;
+			m_newdata = true;
 			handleByte();
 			break;
 		case TYPETIME:
 			m_Type = TYPETIME;
 			m_LastAddr = addr;
+			m_newdata = true;
 			handleTime();
 			break;
 		default:
