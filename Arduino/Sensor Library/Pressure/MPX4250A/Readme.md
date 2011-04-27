@@ -1,9 +1,9 @@
 MPX4250A
 ===========
-### - Type: Manifold Absolute Pressure Sensor
-### - Output: kPa - kilopascals
-### - Model: MPX4250AP
-### - Use: The MPX4250A series Manifold Absolute Pressure (MAP) sensor for 
+ - Type: Manifold Absolute Pressure Sensor
+ - Output: kPa - kilopascals
+ - Model: MPX4250AP
+ - Use: The MPX4250A series Manifold Absolute Pressure (MAP) sensor for 
 engine control is designed to sense absolute air pressure within the intake 
 manifold. This measurement can be used to compute the amount of fuel 
 required for each cylinder.
