@@ -30,18 +30,8 @@ int g_stage;
 // User Section: Sensor Setup	    ---------- ---------- ---------- 
 void input()
 {
-	int tmp = analogRead(0);
-	if (tmp > 0)
-	{
-		if (g_stage == 3)
-			g_stage = 0;
-		g_packet.SetReading(tmp);
-		g_packet.SetStatus(true);
-	}
-	else if ( g_stage == 0)
-	{
-		g_stage = 3;
-	}		
+	g_packet.SetReading(analogRead(0));
+	g_packet.SetStatus(true);	
 }
 // ---------- ---------- ---------- ---------- ---------- ---------- 
 
@@ -53,8 +43,6 @@ void setup()
 	SensingNodeAddress(ADDRESS_PINS);
 #endif
 	g_packet.SetUnit(DATA_UNIT);
-
-	Serial.begin(9600);
 }
 
 void loop()
