@@ -8,9 +8,9 @@ Format
 
 Sensor Name
 ===========
-## - Type:
-## - Model:
-## - Use:
+### - Type:
+### - Model:
+### - Use:
 
 Resources
 ---------
