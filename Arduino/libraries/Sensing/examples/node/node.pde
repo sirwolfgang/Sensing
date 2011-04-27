@@ -70,6 +70,11 @@ void SendPacket()
 			Wire.send((uint8_t *)&g_packet, sizeof(g_packet));
 		g_stage = 0;
 	}
+	// Tell Hub no data
+	else if (g_stage == 3)
+	{
+		Wire.send( TYPENULL );
+	}
 }
 // Initializer: Preset Address
 void SensingNodePreset(unsigned int addr)

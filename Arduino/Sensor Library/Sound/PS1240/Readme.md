@@ -1,7 +1,7 @@
 MPX4250A
 ===========
  - Type: Piezo Buzzer
- - Output:
+ - Output: Knock
  - Model: PS1240
  - Use: High-performance buzzers that employ 
 unimorph piezoelectric elements and are designed for easy 
@@ -18,5 +18,5 @@ Resources
 
 Notes
 -----
-
+This model of sensor/speaker has no polarization. Use on pin on ground, and the other on analog in 0. A Megohm resistor should be used to bridge the two pins, in order to allow your sensor to reset.
 
