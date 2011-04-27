@@ -9,6 +9,7 @@ Format
 Sensor Name
 ===========
 ### - Type:
+### - Output: Unit
 ### - Model:
 ### - Use:
 
