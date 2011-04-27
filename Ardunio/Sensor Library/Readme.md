@@ -5,7 +5,7 @@ This is a collection of sensors and their matching sketches. Each sensor will be
 
 Format
 ------
-
+```
 Sensor Name
 ===========
 ### - Type:
@@ -26,3 +26,4 @@ Notes
 -----
 Notes about the use of the sensor, possible including code snippets
 
+```
