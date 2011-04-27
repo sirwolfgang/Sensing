@@ -18,5 +18,5 @@ Resources
 
 Notes
 -----
-This model of sensor/speaker has no polarization. Use on pin on ground, and the other on analog in 0. A Megohm resistor should be used to bridge the two pins, in order to allow your sensor to reset.
+This model of sensor/speaker has no polarization. Use on pin on ground, and the other on analog in 0. A 1-Megohm resistor should be used to bridge the two pins, in order to allow your sensor to reset.
 
