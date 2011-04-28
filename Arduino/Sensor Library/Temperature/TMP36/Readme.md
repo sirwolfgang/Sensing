@@ -21,6 +21,5 @@ Pin 1 - 5.0v or 3.3v
 Pin 2 - Data to A0
 Pin 3 - Ground
 
-5 volts will work, but offers more noise and less acuracy. If you wire the 3.3v you must also set a line from 3.3v to your aref. Make sure your using the right code, also note there is an extra define in the defines section for 3.3v.
-
+5 volts will work, but offers more noise and less accurate. If you wire the 3.3v you must also set a line from 3.3v to your aref. Make sure your using the right code, also note there is an extra define in the defines section for 3.3v.
 
