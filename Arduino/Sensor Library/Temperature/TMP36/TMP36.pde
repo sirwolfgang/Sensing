@@ -15,11 +15,13 @@ TYPETIME	6			  unsigned long
 #define PACKET_TYPE 3			// Use the above table as reference
 #define DATA_TYPE	float
 
-#define DATA_UNIT	"lx"		// 5 char max
+#define DATA_UNIT	"Deg C"		// 5 char max
 
 #define ADDRESS_TYPE	false	// True = Preset, False = pin based
 #define ADDRESS			2		// Preset Value 
 #define ADDRESS_PINS	8,9,10	// Digital Pins to Address off of 
+
+#define VOLTAGE_THREE	false	// Set to true if your using 3.3v
 // ---------- ---------- ---------- ---------- ---------- ---------- 
 
 Packet<DATA_TYPE> g_packet;
@@ -28,20 +30,17 @@ unsigned long g_timeout;
 int g_stage;
 
 // User Section: Sensor Setup	    ---------- ---------- ---------- 
+
 void input()
 {
-	float volt = analogRead(0) * 5.0 / 1024.0; 
-	float lux;
+	// 5.0v
+ 	float volt = analogRead(0) * 5.0 / 1024;
+	// 3.3v
+//	float volt = analogRead(0) * 3.3 / 1024.0;
 
-	// 10k pulldown, For Darker environments
-	if (volt > 4.0){ lux = 21.824*volt*volt*volt*volt - 161.06*volt*volt*volt + 332.63*volt*volt - 167.44*volt + 13.676; }
-	else { lux = 2.6213*volt*volt*volt - 7.1646*volt*volt + 5.688*volt - 0.3998; }
+	float temperatureC = (volt - 0.5) * 100 ;
 
-	// 1k pulldown, For Lighter environments
-//	if (volt > 3.8){ lux = 266.29*volt*volt*volt*volt - 1673.6*volt*volt*volt + 2903.7*volt*volt - 1242.5*volt + 97.857; }
-//	else { lux = 30.702*volt*volt*volt - 60.088*volt*volt + 49.035*volt - 3.3333; }
-	
-	g_packet.SetReading(lux);     
+	g_packet.SetReading(temperatureC);
 	g_packet.SetStatus(true);
 }
 // ---------- ---------- ---------- ---------- ---------- ---------- 
@@ -54,6 +53,10 @@ void setup()
 	SensingNodeAddress(ADDRESS_PINS);
 #endif
 	g_packet.SetUnit(DATA_UNIT);
+
+#if VOLTAGE_THREE
+	analogReference(EXTERNAL);
+#endif
 }
 
 void loop()
