@@ -15,7 +15,7 @@ TYPETIME	6			  unsigned long
 #define PACKET_TYPE 3			// Use the above table as reference
 #define DATA_TYPE	float
 
-#define DATA_UNIT	"lux"		// 5 char max
+#define DATA_UNIT	"lx"		// 5 char max
 
 #define ADDRESS_TYPE	false	// True = Preset, False = pin based
 #define ADDRESS			2		// Preset Value 
