@@ -12,7 +12,7 @@ void SensingHub::CheckAddress( unsigned int addr )
 	if ((int)Wire.available() == 1)
 	{
 		int type = Wire.receive();
-		
+
 		switch(type)
 		{
 		case TYPENULL:
@@ -313,6 +313,7 @@ void SensingHub::handleBool()
 	if ( (int)sizeof(Packet<bool>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
+		m_newdata = false;
 		return;
 	}
 
@@ -330,6 +331,7 @@ void SensingHub::handleInt()
 	if ( (int)sizeof(Packet<int>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
+		m_newdata = false;
 		return;
 	}
 
@@ -344,9 +346,11 @@ void SensingHub::handleInt()
 void SensingHub::handleFloat()
 {
 	Wire.requestFrom((int)m_LastAddr, sizeof(Packet<float>));
+
 	if ( (int)sizeof(Packet<float>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
+		m_newdata = false;
 		return;
 	}
 
@@ -364,6 +368,7 @@ void SensingHub::handleLong()
 	if ( (int)sizeof(Packet<long>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
+		m_newdata = false;
 		return;
 	}
 
@@ -381,6 +386,7 @@ void SensingHub::handleByte()
 	if ( (int)sizeof(Packet<byte>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
+		m_newdata = false;
 		return;
 	}
 
@@ -398,6 +404,7 @@ void SensingHub::handleTime()
 	if ( (int)sizeof(Packet<unsigned long>) != (int)Wire.available() )
 	{
 		Serial.println("Packet Malformed");
+		m_newdata = false;
 		return;
 	}
 
