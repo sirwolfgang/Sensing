@@ -42,6 +42,8 @@ public:
 	byte GetLastByte();
 	unsigned long GetLastTime();
 
+	// Get Last Type
+	int GetLastType(){ return m_Type; }
 	// Get Last Unit
 	char* GetLastUnit();
 	// Get Last Status

@@ -267,6 +267,7 @@ void SensingHub::SerialPrintAllNew()
 	if (m_newdata)
 	{
 		SerialPrintAllLast();
+		m_newdata = false;
 	}
 }
 
@@ -304,7 +305,6 @@ void SensingHub::SerialPrintAllLast()
 	Serial.print( GetLastUnit() );
 	Serial.print( "," );
 	Serial.println( GetLastStatus() );
-	m_newdata = false;
 }
 
 void SensingHub::handleBool()
