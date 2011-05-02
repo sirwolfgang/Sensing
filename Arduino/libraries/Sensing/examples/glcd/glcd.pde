@@ -34,7 +34,7 @@ void output()
 		{
 			g_hub.SerialPrintAllLast();
 
- 			String displayaddress = String( g_hub.GetLastAddr() );
+ 			String displayaddress = String( g_hub.GetLastAddr()-9 );
 			// Change based on datatype received
 			String displayvalue;
 				switch(g_hub.GetLastType())
@@ -71,7 +71,7 @@ void output()
  			displaystring.toCharArray( tmp ,21 );
  
  			for (unsigned int x = 0; x < 21; ++x)
- 				m_screenbuffer[ g_hub.GetLastAddr()-8 ][x] = tmp[x];
+ 				m_screenbuffer[ g_hub.GetLastAddr()-9 ][x] = tmp[x];
 
  			if (m_lastrefresh < millis())
  			{
