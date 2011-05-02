@@ -20,6 +20,7 @@ Resources
 
 Notes
 -----
+
 Photoresistors are very inacturate as even two from the same batch will vary greatly. This being said, I still tryed to take Ladyada's Lux tables and use them to help calucate lux. You will need to comment/uncomment based on your pulldown resitor:
 ```c++
 	// 10k pulldown, For Darker environments

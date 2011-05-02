@@ -77,7 +77,8 @@ void output()
  			{
  				refresh();
  				m_lastrefresh = millis() + 750;
- 			}
+ 			}
+
 			g_hub.SetDataUsed();
 		}
 		
@@ -114,9 +115,13 @@ void setup()
 		for (unsigned int x = 0; x < 24; ++x)
 			m_screenbuffer[y][x] = ' ';
 
-	char tmp[21] = "     Plug-N-Learn";
-	for (unsigned int x = 0; x < 21; ++x)
- 		m_screenbuffer[0][x] = tmp[x];
+	char title[23] = "     Plug-N-Learn";
+	for (unsigned int x = 0; x < 23; ++x)
+ 		m_screenbuffer[0][x] = title[x];
+
+	char web[23] = " sensingplatform.org";
+	for (unsigned int x = 0; x < 23; ++x)
+ 		m_screenbuffer[7][x] = web[x];
 
 	m_lastrefresh = millis();
 }
