@@ -26,6 +26,7 @@ ST7565 glcd(9, 8, 7, 6, 5);
 char m_screenbuffer[8][21];
 
 unsigned long m_lastrefresh;
+bool m_heart;
 
 // User Section: Output		     --------- --------- --------- 
 void output()
@@ -97,6 +98,7 @@ void refresh()
 void setup()
 {
 	Serial.begin(9600);  // start serial for output
+	pinMode(13, OUTPUT);
 
 	// turn on backlight
 	pinMode(BACKLIGHT_LED, OUTPUT);
@@ -133,4 +135,10 @@ void loop()
 		g_hub.CheckAddress(i);
 		output();
 	}
+	
+	if (m_heart)
+		digitalWrite(13, HIGH);
+	else
+		digitalWrite(13, LOW);
+	m_heart = !m_heart;
 }

@@ -6,6 +6,7 @@
 #define ADDRESS_RANGE_END	99
 
 SensingHub g_hub;
+bool m_heart;
 
 // User Section: Output		     --------- --------- --------- 
 void output()
@@ -17,6 +18,7 @@ void output()
 void setup()
 {
 	Serial.begin(9600);  // start serial for output
+	pinMode(13, OUTPUT);
 }
 
 void loop()
@@ -26,4 +28,10 @@ void loop()
 		g_hub.CheckAddress(i);
 		output();
 	}
+
+	if (m_heart)
+		digitalWrite(13, HIGH);
+	else
+		digitalWrite(13, LOW);
+	m_heart = !m_heart;
 }
