@@ -1,6 +1,11 @@
 /**
- todo: add header notes
-  */
+ Very rough example code for logging and graphing from the PlugNLearn Sensor Hub
+ Todo: 
+   - Add license
+   - Selectable COM port
+   - adjustable scale
+   - exception handling
+*/
 
 import controlP5.*;
 import processing.serial.*;
@@ -11,7 +16,9 @@ import org.gwoptics.graphics.graph2D.Graph2D;
 import org.gwoptics.graphics.graph2D.traces.ILine2DEquation;
 import org.gwoptics.graphics.graph2D.traces.RollingLine2DTrace;
 
-boolean MAKE_MOVIE = true;
+boolean MAKE_MOVIE = false;
+boolean logging= false;
+boolean init = true;
 
 MovieMaker mm;
 
@@ -19,14 +26,14 @@ MovieMaker mm;
 class eq implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
 		//return mouseX;
-                return intDataArray[0];
+                return doubleDataArray[0];
 	}		
 }
 
 class eq2 implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
 		//return mouseY;
-                return intDataArray[1];
+                return doubleDataArray[1];
 	}		
 }
 
@@ -38,37 +45,37 @@ class eq3 implements ILine2DEquation{
 		else
 			return 0;
                 */
-                return intDataArray[2];
+                return doubleDataArray[2];
 	}
 }
 
 class eq4 implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
-	       return intDataArray[3];
+	       return doubleDataArray[3];
 	}		
 }
 
 class eq5 implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
-	       return intDataArray[4];
+	       return doubleDataArray[4];
 	}		
 }
 
 class eq6 implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
-	       return intDataArray[5];
+	       return doubleDataArray[5];
 	}		
 }
 
 class eq7 implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
-	       return intDataArray[6];
+	       return doubleDataArray[6];
 	}		
 }
 
 class eq8 implements ILine2DEquation{
 	public double computePoint(double x,int pos) {
-	       return intDataArray[7];
+	       return doubleDataArray[7];
 	}		
 }
 
@@ -81,12 +88,13 @@ int activeTab=1;
 
 Serial myPort;
 StringBuffer lineBuffer;
-int[] intDataArray;
+double[] doubleDataArray;
 
 ControlP5 controlP5;
 
 DropdownList ddlCom;
 
+PrintWriter output;
 
 
 int myColorBackground = color(0,0,0);
@@ -94,6 +102,8 @@ int myColorBackground = color(0,0,0);
 int sliderValue = 100;
 
 void setup() {
+  
+   
   
   if (MAKE_MOVIE) {
     mm = new MovieMaker(this, 800,600, "sensing_processing.mov", 30, MovieMaker.ANIMATION, MovieMaker.BEST);
@@ -105,19 +115,18 @@ void setup() {
   
   String portName = Serial.list()[0];
   lineBuffer = new StringBuffer();
-  intDataArray = new int[8]; 
+  doubleDataArray = new double[8];
+  
   
   myPort = new Serial (this, portName, 9600);
-  
-  
   
   controlP5 = new ControlP5(this);
   
   //ddlCom = controlP5.addDropdownList("comlist", 40,40,100,120);
   //customize(ddlCom);
   
-  controlP5.addButton("start",10,680,20,80,20);
-  controlP5.addButton("stop",4,680,60,80,20);
+  controlP5.addButton("LogStart",10,680,20,80,20);
+  controlP5.addButton("LogStop",4,680,60,80,20);
   
   // tab global is a tab that lies on top of any other tab and
   // is always visible
@@ -189,17 +198,21 @@ void setup() {
 
 void draw() {
   background(0);
-  //fill(255);
-  //rect(0,0,width,100);
   if (activeTab == 1)
   {
     g.draw();
-  }
+  } 
   
-  if (MAKE_MOVIE){ 
-     mm.addFrame();
-  }
+  if (MAKE_MOVIE)mm.addFrame();
 }
+
+/*
+void stop()
+{
+
+  super.stop();
+}
+*/
 
 void keyPressed() {
   if (key == ' ') {
@@ -215,9 +228,22 @@ void controlEvent(ControlEvent theControlEvent) {
     
     println("tab : "+theControlEvent.tab().id()+" / "+theControlEvent.tab().name());
     activeTab = theControlEvent.tab().id();
-  
   }
+  println(theControlEvent.controller().name());
 }
+
+public void LogStart(int theValue) {
+   output = createWriter("log.csv");
+   logging = true;
+  }
+
+public void LogStop(int theValue) {
+  logging = false;
+  output.flush(); // Write the remaining data
+  output.close(); // Finish the file
+}
+
+
 
 void customize(DropdownList ddl) {
   ddl.setBackgroundColor(color(190));
@@ -241,7 +267,6 @@ void customize(DropdownList ddl) {
 
 void serialEvent(Serial p)
 {
-  //println("[serialEvent]");
   if ( myPort.available() > 0) {  // If data is available,
     String inBuffer = myPort.readString();         // read it and store it in val
     if (inBuffer!=null) {
@@ -258,7 +283,12 @@ void serialEvent(Serial p)
       if (lineBuffer.toString().indexOf('\n') !=-1)
         {
         //println("found LF");
-        splitBuffer();
+        lineBuffer.delete(lineBuffer.length()-2, lineBuffer.length());
+        //lineBuffer.deleteCharAt(lineBuffer.length()-1);
+        
+        print(lineBuffer);
+        updateCSV(lineBuffer.toString());
+        splitBuffer(); 
         }
       
     }
@@ -267,8 +297,9 @@ void serialEvent(Serial p)
 }
 
 void splitBuffer(){
-  println("[splitBuffer]");
+  //println("[splitBuffer]");
   String[] curReading = split(lineBuffer.toString(), ',');
+ /*
   for (int i=0; i<curReading.length; i++)
   {
     print("[curReading][");
@@ -276,26 +307,24 @@ void splitBuffer(){
     print("]");
     println (curReading[i]);
   }
+*/
   int sensor = Integer.parseInt(curReading[1]);
-  print("[sensor]:");
-  println(sensor); 
+  //print("[sensor]:");
+  //println(sensor); 
   
-  int sensorReading = Integer.parseInt(curReading[2]);
-  print("[sensorReading]:");
-  println(sensorReading); 
-  
-  intDataArray[sensor-10] = sensorReading;
-  
-  //TODO: Strip out CR in the last item...
-  //TODO: graph here
-  
-  //TODO: write line to csv file here
-  
-  
+  double sensorReading = Double.parseDouble(curReading[2]);
+  //print("[sensorReading]:");
+  //println(sensorReading); 
+  doubleDataArray[sensor-10] = sensorReading;
+
   //empty the lineBuffer
   lineBuffer.setLength(0);
   
   
+  
 }
 
-
+void updateCSV(String csvText)
+{
+  if (logging) output.println(csvText); 
+}
